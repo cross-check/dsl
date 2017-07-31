@@ -12,8 +12,9 @@
   "scripts": {
     "preversion": "npm run test",
     "prepare": "npm run build",
+    "pretest": "npm run build",
     "build": "./scripts/build",
-    "test": "./scripts/build && ./scripts/test"
+    "test": "qunit dist/tests/test/**-test.js"
   },
   "license": "MIT",
   "devDependencies": {
