@@ -146,20 +146,24 @@ QUnit.test('"keys" does not mutate previously defined builder', assert => {
     nickname: presenceWithKeys
   });
 
-  let expected: ValidationDescriptor[] = [
-    {
-      field: 'name',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: null
-    },
-    {
-      field: 'nickname',
-      validator: { name: 'presence', args: [] },
-      keys: ['firstName', 'lastName'],
-      contexts: null
-    }
-  ];
+  let expected: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    nickname: [
+      {
+        field: 'nickname',
+        validator: { name: 'presence', args: [] },
+        keys: ['firstName', 'lastName'],
+        contexts: []
+      }
+    ]
+  };
 
   assert.deepEqual(validations, expected);
 });
@@ -174,20 +178,24 @@ QUnit.test('"on" does not mutate previously defined builder', assert => {
     email: presenceWithContext
   });
 
-  let expected: ValidationDescriptor[] = [
-    {
-      field: 'name',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: null
-    },
-    {
-      field: 'email',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: ['create']
-    }
-  ];
+  let expected: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: ['create']
+      }
+    ]
+  };
 
   assert.deepEqual(validations, expected);
 });
