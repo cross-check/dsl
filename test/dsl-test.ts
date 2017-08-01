@@ -1,4 +1,4 @@
-import dsl, { on, validates, ValidationDescriptor } from '../src';
+import dsl, { on, validates, ValidationDescriptors } from '@validations/dsl';
 
 QUnit.module('DSL');
 
@@ -11,28 +11,34 @@ QUnit.test('basic DSL', assert => {
     ]
   });
 
-  let expected: ValidationDescriptor[] = [
-    {
-      field: 'name',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: null
-    },
-    {
-      field: 'email',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: null
-    },
-    {
-      field: 'email',
-      validator: { name: 'email', args: [
-        { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }
-      ] },
-      keys: null,
-      contexts: null
-    }
-  ];
+  let expected: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }, {
+        field: 'email',
+        validator: {
+          name: 'email',
+          args: [
+            { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }
+          ]
+        },
+        keys: [],
+        contexts: []
+      }
+    ]
+  };
 
   assert.deepEqual(validations, expected);
 });
@@ -52,32 +58,38 @@ QUnit.test('dependent keys', assert => {
     emailConfirmation: validates('confirmation').keys('email')
   });
 
-  let expected: ValidationDescriptor[] = [
-    {
-      field: 'name',
-      validator: { name: 'presence', args: [] },
-      keys: ['firstName', 'lastName'],
-      contexts: null
-    },
-    {
-      field: 'email',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: null
-    },
-    {
-      field: 'email',
-      validator: { name: 'email', args: [] },
-      keys: null,
-      contexts: null
-    },
-    {
-      field: 'emailConfirmation',
-      validator: { name: 'confirmation', args: [] },
-      keys: ['email'],
-      contexts: null
-    }
-  ];
+  let expected: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: ['firstName', 'lastName'],
+        contexts: []
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      },
+      {
+        field: 'email',
+        validator: { name: 'email', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    emailConfirmation: [
+      {
+        field: 'emailConfirmation',
+        validator: { name: 'confirmation', args: [] },
+        keys: ['email'],
+        contexts: []
+      }
+    ]
+  };
 
   assert.deepEqual(validations, expected);
 });
@@ -96,26 +108,30 @@ QUnit.test('validation contexts', assert => {
     ]),
   });
 
-  let expected: ValidationDescriptor[] = [
-    {
-      field: 'name',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: ['create', 'update']
-    },
-    {
-      field: 'email',
-      validator: { name: 'presence', args: [] },
-      keys: null,
-      contexts: ['create']
-    },
-    {
-      field: 'email',
-      validator: { name: 'email', args: [] },
-      keys: null,
-      contexts: ['create']
-    }
-  ];
+  let expected: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: ['create', 'update']
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: ['create']
+      },
+      {
+        field: 'email',
+        validator: { name: 'email', args: [] },
+        keys: [],
+        contexts: ['create']
+      }
+    ]
+  };
 
   assert.deepEqual(validations, expected);
 });
