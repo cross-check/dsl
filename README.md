@@ -2,6 +2,6 @@
 
 A DSL for building validations. Extracted from/inpsired by [ember-cp-validations](http://offirgolan.github.io/ember-cp-validations/).
 
-##Install and teat
+##Install and test
 `npm install`
 `npm test`
