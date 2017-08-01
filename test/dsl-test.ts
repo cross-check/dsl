@@ -121,10 +121,57 @@ QUnit.test('validation contexts', assert => {
 });
 
 
-QUnit.test('does not mutate previously defined validations', assert => {
-  let originalValidation = validates('presence');
-  let anotherValidation = originalValidation.keys('firstName', 'lastName');
-  console.log(originalValidation, anotherValidation);
+QUnit.test('"keys" does not mutate previously defined builder', assert => {
+  let presence = validates('presence');
+  let presenceWithKeys = presence.keys('firstName', 'lastName');
 
-  assert.deepEqual(originalValidation, anotherValidation);
+  let validations = dsl({
+    name: presence,
+    nickname: presenceWithKeys
+  });
+
+  let expected: ValidationDescriptor[] = [
+    {
+      field: 'name',
+      validator: { name: 'presence', args: [] },
+      keys: null,
+      contexts: null
+    },
+    {
+      field: 'nickname',
+      validator: { name: 'presence', args: [] },
+      keys: ['firstName', 'lastName'],
+      contexts: null
+    }
+  ];
+
+  assert.deepEqual(validations, expected);
+});
+
+
+QUnit.test('"on" does not mutate previously defined builder', assert => {
+  let presence = validates('presence');
+  let presenceWithContext = presence.on('create');
+
+  let validations = dsl({
+    name: presence,
+    email: presenceWithContext
+  });
+
+  let expected: ValidationDescriptor[] = [
+    {
+      field: 'name',
+      validator: { name: 'presence', args: [] },
+      keys: null,
+      contexts: null
+    },
+    {
+      field: 'email',
+      validator: { name: 'presence', args: [] },
+      keys: null,
+      contexts: ['create']
+    }
+  ];
+
+  assert.deepEqual(validations, expected);
 });
