@@ -119,3 +119,12 @@ QUnit.test('validation contexts', assert => {
 
   assert.deepEqual(validations, expected);
 });
+
+
+QUnit.test('does not mutate previously defined validations', assert => {
+  let originalValidation = validates('presence');
+  let anotherValidation = originalValidation.keys('firstName', 'lastName');
+  console.log(originalValidation, anotherValidation);
+
+  assert.deepEqual(originalValidation, anotherValidation);
+});
