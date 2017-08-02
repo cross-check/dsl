@@ -1,4 +1,4 @@
-import { Nested, flatten } from '../src/utils';
+import { flatten, Nested } from '../src/utils';
 
 QUnit.module('Utils');
 
@@ -23,5 +23,5 @@ QUnit.test('flatten', assert => {
     [10]
   ];
 
-  assert.deepEqual([...flatten(deeplyNested)], [1,2,3,4,5,6,7,8,9,10], 'deeply nested');
+  assert.deepEqual([...flatten(deeplyNested)], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'deeply nested');
 });

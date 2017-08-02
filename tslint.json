@@ -1,3 +1,16 @@
 {
-  "extends": "tslint:recommended"
+  "extends": "tslint:recommended",
+  "rules": {
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "no-empty-interface": false,
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "member-access": [true, "no-public"],
+    "prefer-const": false,
+    "quotemark": [true, "single"],
+    "trailing-comma": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "curly": [true, "ignore-same-line"],
+    "object-literal-sort-keys": false
+  }
 }
