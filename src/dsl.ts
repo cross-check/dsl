@@ -1,4 +1,4 @@
-import { Dict, Nested, Opaque, assert, dict, flatten } from './utils';
+import { assert, dict, Dict, flatten, Nested, Opaque } from './utils';
 
 export default function normalize(fields: FieldsDSL): ValidationDescriptors {
   let descriptors: ValidationDescriptors = dict();
@@ -81,7 +81,13 @@ class ValidationBuilder implements ValidationBuilderDSL {
   }
 }
 
-function descriptor(field: string, name: string, _args: Opaque[], _keys: string[], _contexts: string[]): ValidationDescriptor {
+function descriptor(
+  field: string,
+  name: string,
+  _args: Opaque[],
+  _keys: string[],
+  _contexts: string[]
+): ValidationDescriptor {
   let args = Object.freeze(_args);
   let validator = Object.freeze({ name, args });
   let keys = Object.freeze(_keys);
