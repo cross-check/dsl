@@ -86,7 +86,7 @@ QUnit.test('must use append/replace to modify existing validations', assert => {
     extend(parent, {
       name: validates('length', 6)
     });
-  }, /`name` already has existing validations; use `append()` or `replace()` to add or completely replace validations/);
+  }, /`name` already has existing validations; use `append\(\)` or `replace\(\)` to add or completely replace validations/);
 });
 
 QUnit.test('append new validations', assert => {
@@ -103,7 +103,7 @@ QUnit.test('append new validations', assert => {
     extend(parent, {
       password: append(validates('password'))
     });
-  }, /cannot use `append()` when there are no existing validations defined for `password`/);
+  }, /cannot use `append\(\)` when there are no existing validations defined for `password`/);
 
   let child = extend(parent, {
     name: append([
@@ -142,13 +142,13 @@ QUnit.test('append new validations', assert => {
         contexts: []
       }, {
         field: 'email',
-        validator: { name: 'email', args: [{ tlds: ['.com'] }] },
+        validator: { name: 'email', args: [{ tlds: ['.com', '.net', '.org', '.edu', '.gov'] }] },
         keys: [],
         contexts: []
       },
       {
         field: 'email',
-        validator: { name: 'length', args: [{ tlds: [6] }] },
+        validator: { name: 'length', args: [6] },
         keys: [],
         contexts: []
       }
@@ -160,7 +160,8 @@ QUnit.test('append new validations', assert => {
         keys: ['email'],
         contexts: []
       }
-    ]
+    ],
+    password: []
   };
 
   assert.deepEqual(child, expected);
@@ -180,7 +181,7 @@ QUnit.test('replacing existing validations', assert => {
     extend(parent, {
       password: append(validates('password'))
     });
-  }, /cannot use `replace()` when there are no existing validations defined for `password`/);
+  }, /cannot use `replace\(\)` when there are no existing validations defined for `password`/);
 
   let child = extend(parent, {
     email: replace([
@@ -211,7 +212,9 @@ QUnit.test('replacing existing validations', assert => {
         keys: [],
         contexts: []
       }
-    ]
+    ],
+    emailConfirmation: [],
+    password: []
   };
 
   assert.deepEqual(child, expected);

@@ -12,6 +12,5 @@ export {
   default as extend,
   append,
   replace,
-  FieldsExtensionsDSL,
-  FieldExtensionDSL
+  FieldsExtensionsDSL
 } from './extend';

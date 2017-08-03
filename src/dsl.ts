@@ -69,7 +69,7 @@ class ValidationBuilder implements ValidationBuilderDSL {
   }
 
   merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
-    throw '`name` already has existing validations; use `append()` or `replace()` to add or completely replace validations';
+    throw new Error(`\`${field}\` already has existing validations; use \`append()\` or \`replace()\` to add or completely replace validations`);
   }
 
   private _clone(callback: (builder: ValidationBuilder) => void): ValidationBuilder {
