@@ -15,12 +15,19 @@ export function append(validations: Nested<ValidationBuilderDSL>) {
   return new Append(validations);
 }
 
-class Append implements FieldExtensionDSL {
+export class Append implements FieldExtensionDSL {
   constructor(private validations: Nested<ValidationBuilderDSL>) {
   }
 
   merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
-    throw 'not implemented';
+    // TODO: clone `existing` instead of using directly.
+    let validators: ValidationDescriptor[] = existing;
+
+    for (let builder of flatten(this.validations)) {
+      validators.push(builder.build(field));
+    }
+
+    return validators;
   }
 }
 
@@ -28,11 +35,17 @@ export function replace(validations: Nested<ValidationBuilderDSL>) {
   return new Replace(validations);
 }
 
-class Replace implements FieldExtensionDSL {
+export class Replace implements FieldExtensionDSL {
   constructor(private validations: Nested<ValidationBuilderDSL>) {
   }
 
   merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
-    throw 'not implemented';
+    let validators: ValidationDescriptor[] = [];
+
+    for (let builder of flatten(this.validations)) {
+      validators.push(builder.build(field));
+    }
+
+    return validators;
   }
 }
