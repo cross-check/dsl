@@ -2,21 +2,34 @@ import { ValidationBuilderDSL, ValidationDescriptor, ValidationDescriptors } fro
 import { Dict, Nested, assert, flatten } from './utils';
 
 export default function extend(parent: ValidationDescriptors, extensions: FieldsExtensionsDSL): ValidationDescriptors {
-  throw 'not implemented';
+  // for each extension field
+  // if the field exists on the parent, we should expect append/replace merge , error if not.
+  // else it doesn't exist, we should expect to build , error if not.
+
+  return parent;
 }
 
-export type FieldsExtensionsDSL = Dict<Nested<ValidationBuilderDSL> | FieldExtensionDSL>;
+export type FieldsExtensionsDSL = Dict<Nested<ValidationBuilderDSL>>;
 
-export interface FieldExtensionDSL {
-  merge(field: string, descriptors: ValidationDescriptor[]): ValidationDescriptor[];
-}
 
 export function append(validations: Nested<ValidationBuilderDSL>) {
   return new Append(validations);
 }
 
-export class Append implements FieldExtensionDSL {
+export class Append implements ValidationBuilderDSL {
   constructor(private validations: Nested<ValidationBuilderDSL>) {
+  }
+
+  keys(...keys: string[]): ValidationBuilderDSL {
+    throw `not implemented`;
+  }
+
+  on(...contexts: string[]): ValidationBuilderDSL {
+    throw `not implemented`;
+  }
+
+  build(field: string): ValidationDescriptor {
+    throw `cannot use \`append()\` when there are no existing validations defined for \`${field}\``;
   }
 
   merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
@@ -35,8 +48,20 @@ export function replace(validations: Nested<ValidationBuilderDSL>) {
   return new Replace(validations);
 }
 
-export class Replace implements FieldExtensionDSL {
+export class Replace implements ValidationBuilderDSL {
   constructor(private validations: Nested<ValidationBuilderDSL>) {
+  }
+
+  keys(...keys: string[]): ValidationBuilderDSL {
+    throw `not implemented`;
+  }
+
+  on(...contexts: string[]): ValidationBuilderDSL {
+    throw `not implemented`;
+  }
+
+  build(field: string): ValidationDescriptor {
+    throw `cannot use \`replace()\` when there are no existing validations defined for \`${field}\``;
   }
 
   merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
