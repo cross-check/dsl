@@ -241,3 +241,84 @@ QUnit.test('replacing existing validations', assert => {
 
   assert.deepEqual(child, expected);
 });
+
+QUnit.test('replacing existing validations does not mutate parent', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
+      validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
+
+  let expectedParent: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }, {
+        field: 'email',
+        validator: { name: 'email', args: [{ tlds: ['.com', '.net', '.org', '.edu', '.gov'] }] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    emailConfirmation: [
+      {
+        field: 'emailConfirmation',
+        validator: { name: 'confirmation', args: [] },
+        keys: ['email'],
+        contexts: []
+      }
+    ]
+  };
+
+  assert.deepEqual(parent, expectedParent, 'parent does not match before extending');
+
+  let child = extend(parent, {
+    email: replace([
+      validates('presence'),
+      validates('email', { tlds: ['.com'] }),
+    ]),
+    emailConfirmation: replace([])
+  });
+
+  let expectedChild: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }, {
+        field: 'email',
+        validator: { name: 'email', args: [{ tlds: ['.com'] }] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    emailConfirmation: []
+  };
+
+  assert.deepEqual(child, expectedChild, 'child does not match after extending');
+  assert.deepEqual(parent, expectedParent, 'parent does not match after extending');
+});
