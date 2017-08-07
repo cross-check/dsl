@@ -190,7 +190,7 @@ QUnit.test('replacing existing validations when none exist', assert => {
 
   assert.throws(() => {
     extend(parent, {
-      password: append(validates('password'))
+      password: replace(validates('password'))
     });
   }, /cannot use `replace\(\)` when there are no existing validations defined for `password`/);
 
