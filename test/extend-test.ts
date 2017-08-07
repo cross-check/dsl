@@ -89,7 +89,7 @@ QUnit.test('must use append/replace to modify existing validations', assert => {
   }, /`name` already has existing validations; use `append\(\)` or `replace\(\)` to add or completely replace validations/);
 });
 
-QUnit.test('append new validations', assert => {
+QUnit.test('append new validations when none exist', assert => {
   let parent = dsl({
     name: validates('presence'),
     email: [
@@ -104,6 +104,18 @@ QUnit.test('append new validations', assert => {
       password: append(validates('password'))
     });
   }, /cannot use `append\(\)` when there are no existing validations defined for `password`/);
+
+});
+
+QUnit.test('append new validations', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
+      validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
 
   let child = extend(parent, {
     name: append([
@@ -160,14 +172,13 @@ QUnit.test('append new validations', assert => {
         keys: ['email'],
         contexts: []
       }
-    ],
-    password: []
+    ]
   };
 
   assert.deepEqual(child, expected);
 });
 
-QUnit.test('replacing existing validations', assert => {
+QUnit.test('replacing existing validations when none exist', assert => {
   let parent = dsl({
     name: validates('presence'),
     email: [
@@ -182,6 +193,18 @@ QUnit.test('replacing existing validations', assert => {
       password: append(validates('password'))
     });
   }, /cannot use `replace\(\)` when there are no existing validations defined for `password`/);
+
+});
+
+QUnit.test('replacing existing validations', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
+      validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
 
   let child = extend(parent, {
     email: replace([
@@ -213,8 +236,7 @@ QUnit.test('replacing existing validations', assert => {
         contexts: []
       }
     ],
-    emailConfirmation: [],
-    password: []
+    emailConfirmation: []
   };
 
   assert.deepEqual(child, expected);
