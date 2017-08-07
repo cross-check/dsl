@@ -242,7 +242,7 @@ QUnit.test('replacing existing validations', assert => {
   assert.deepEqual(child, expected);
 });
 
-QUnit.test('replacing existing validations does not mutate parent', assert => {
+QUnit.test('extending existing validations does not mutate parent', assert => {
   let parent = dsl({
     name: validates('presence'),
     email: [
@@ -291,7 +291,9 @@ QUnit.test('replacing existing validations does not mutate parent', assert => {
       validates('presence'),
       validates('email', { tlds: ['.com'] }),
     ]),
-    emailConfirmation: replace([])
+    emailConfirmation: append([
+      validates('presence')
+    ])
   });
 
   let expectedChild: ValidationDescriptors = {
@@ -316,7 +318,19 @@ QUnit.test('replacing existing validations does not mutate parent', assert => {
         contexts: []
       }
     ],
-    emailConfirmation: []
+    emailConfirmation: [
+      {
+        field: 'emailConfirmation',
+        validator: { name: 'confirmation', args: [] },
+        keys: ['email'],
+        contexts: []
+      },
+      {
+        field: 'emailConfirmation',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }]
   };
 
   assert.deepEqual(child, expectedChild, 'child does not match after extending');

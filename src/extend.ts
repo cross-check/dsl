@@ -1,10 +1,9 @@
 import { ValidationBuilderDSL, ValidationDescriptor, ValidationDescriptors } from './dsl';
 import { Dict, Nested, assert, flatten } from './utils';
+import { cloneDeep } from 'lodash';
 
 export default function extend(parent: ValidationDescriptors, extensions: FieldsExtensionsDSL): ValidationDescriptors {
-
-  // TODO: clone `parent` instead of using it directly.
-  let existingDescriptors: ValidationDescriptors = parent;
+  let existingDescriptors: ValidationDescriptors = cloneDeep(parent);
 
   for (let extensionField of Object.keys(extensions)) {
     if (parent[extensionField]) {
@@ -56,7 +55,6 @@ export class Append implements ValidationBuilderDSL {
   }
 
   merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
-    // TODO: clone `existing` instead of using directly.
     let validators: ValidationDescriptor[] = existing;
 
     for (let builder of flatten(this.validations)) {
