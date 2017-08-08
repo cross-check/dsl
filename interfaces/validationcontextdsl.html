@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ValidationBuilderDSL | @validations/dsl</title>
+	<title>ValidationContextDSL | @validations/dsl</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="validationbuilderdsl.html">ValidationBuilderDSL</a>
+					<a href="validationcontextdsl.html">ValidationContextDSL</a>
 				</li>
 			</ul>
-			<h1>Interface ValidationBuilderDSL</h1>
+			<h1>Interface ValidationContextDSL</h1>
 		</div>
 	</div>
 </header>
@@ -70,14 +70,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ValidationBuilderDSL</span>
+						<span class="target">ValidationContextDSL</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/validationbuilder.html" class="tsd-signature-type">ValidationBuilder</a></li>
+					<li><a href="../classes/validationcontext.html" class="tsd-signature-type">ValidationContext</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -87,9 +87,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="validationbuilderdsl.html#build" class="tsd-kind-icon">build</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="validationbuilderdsl.html#keys" class="tsd-kind-icon">keys</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="validationbuilderdsl.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="validationcontextdsl.html#do" class="tsd-kind-icon">do</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,71 +96,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="build" class="tsd-anchor"></a>
-					<h3>build</h3>
+					<a name="do" class="tsd-anchor"></a>
+					<h3>do</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">build<span class="tsd-signature-symbol">(</span>field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#validationdescriptor" class="tsd-signature-type">ValidationDescriptor</a></li>
+						<li class="tsd-signature tsd-kind-icon">do<span class="tsd-signature-symbol">(</span>validations<span class="tsd-signature-symbol">: </span><a href="../globals.html#nested" class="tsd-signature-type">Nested</a><span class="tsd-signature-symbol">&lt;</span><a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#nested" class="tsd-signature-type">Nested</a><span class="tsd-signature-symbol">&lt;</span><a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/d02ac21/src/dsl.ts#L31">src/dsl.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/bb8daf0/src/dsl.ts#L35">src/dsl.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>field: <span class="tsd-signature-type">string</span></h5>
+									<h5>validations: <a href="../globals.html#nested" class="tsd-signature-type">Nested</a><span class="tsd-signature-symbol">&lt;</span><a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#validationdescriptor" class="tsd-signature-type">ValidationDescriptor</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="keys" class="tsd-anchor"></a>
-					<h3>keys</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">keys<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>keys<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/d02ac21/src/dsl.ts#L29">src/dsl.ts:29</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>keys: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="on" class="tsd-anchor"></a>
-					<h3>on</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contexts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/d02ac21/src/dsl.ts#L30">src/dsl.ts:30</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contexts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#nested" class="tsd-signature-type">Nested</a><span class="tsd-signature-symbol">&lt;</span><a href="validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -193,27 +145,21 @@
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="nestedarray.html" class="tsd-kind-icon">Nested<wbr>Array</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="validationbuilderdsl.html" class="tsd-kind-icon">Validation<wbr>BuilderDSL</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="validationbuilderdsl.html" class="tsd-kind-icon">Validation<wbr>BuilderDSL</a>
+						<a href="validationcontextdsl.html" class="tsd-kind-icon">Validation<wbr>ContextDSL</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="validationbuilderdsl.html#build" class="tsd-kind-icon">build</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="validationbuilderdsl.html#keys" class="tsd-kind-icon">keys</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="validationbuilderdsl.html#on" class="tsd-kind-icon">on</a>
+								<a href="validationcontextdsl.html#do" class="tsd-kind-icon">do</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="validationcontextdsl.html" class="tsd-kind-icon">Validation<wbr>ContextDSL</a>
-					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#fieldsdsl" class="tsd-kind-icon">FieldsDSL</a>
 					</li>
