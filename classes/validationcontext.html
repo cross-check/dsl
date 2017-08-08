@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ValidationBuilderDSL | @validations/dsl</title>
+	<title>ValidationContext | @validations/dsl</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_src_dsl_.html">&quot;src/dsl&quot;</a>
-				</li>
-				<li>
-					<a href="_src_dsl_.validationbuilderdsl.html">ValidationBuilderDSL</a>
+					<a href="validationcontext.html">ValidationContext</a>
 				</li>
 			</ul>
-			<h1>Interface ValidationBuilderDSL</h1>
+			<h1>Class ValidationContext</h1>
 		</div>
 	</div>
 </header>
@@ -73,99 +70,103 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ValidationBuilderDSL</span>
+						<span class="target">ValidationContext</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
-				<h3>Implemented by</h3>
+				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/_src_dsl_.validationbuilder.html" class="tsd-signature-type">ValidationBuilder</a></li>
+					<li><a href="../interfaces/validationcontextdsl.html" class="tsd-signature-type">ValidationContextDSL</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported"><a href="validationcontext.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-not-exported">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="validationcontext.html#_contexts" class="tsd-kind-icon">_contexts</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_src_dsl_.validationbuilderdsl.html#build" class="tsd-kind-icon">build</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_src_dsl_.validationbuilderdsl.html#keys" class="tsd-kind-icon">keys</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_src_dsl_.validationbuilderdsl.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="validationcontext.html#do" class="tsd-kind-icon">do</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Validation<wbr>Context<span class="tsd-signature-symbol">(</span>_contexts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="validationcontext.html" class="tsd-signature-type">ValidationContext</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/e6dd762/src/dsl.ts#L93">src/dsl.ts:93</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>_contexts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="validationcontext.html" class="tsd-signature-type">ValidationContext</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-not-exported">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+					<a name="_contexts" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _contexts</h3>
+					<div class="tsd-signature tsd-kind-icon">_contexts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/e6dd762/src/dsl.ts#L94">src/dsl.ts:94</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="build" class="tsd-anchor"></a>
-					<h3>build</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">build<span class="tsd-signature-symbol">(</span>field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_src_dsl_.html#validationdescriptor" class="tsd-signature-type">ValidationDescriptor</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+					<a name="do" class="tsd-anchor"></a>
+					<h3>do</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">do<span class="tsd-signature-symbol">(</span>nested<span class="tsd-signature-symbol">: </span><a href="../globals.html#nested" class="tsd-signature-type">Nested</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/validationcontextdsl.html">ValidationContextDSL</a>.<a href="../interfaces/validationcontextdsl.html#do">do</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/e6dd762/src/dsl.ts#L31">src/dsl.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/e6dd762/src/dsl.ts#L97">src/dsl.ts:97</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>field: <span class="tsd-signature-type">string</span></h5>
+									<h5>nested: <a href="../globals.html#nested" class="tsd-signature-type">Nested</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/_src_dsl_.html#validationdescriptor" class="tsd-signature-type">ValidationDescriptor</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="keys" class="tsd-anchor"></a>
-					<h3>keys</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">keys<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>keys<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_dsl_.validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/e6dd762/src/dsl.ts#L29">src/dsl.ts:29</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>keys: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_src_dsl_.validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="on" class="tsd-anchor"></a>
-					<h3>on</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contexts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_dsl_.validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ckung/validations-dsl/blob/e6dd762/src/dsl.ts#L30">src/dsl.ts:30</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contexts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_src_dsl_.validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/validationbuilderdsl.html" class="tsd-signature-type">ValidationBuilderDSL</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -177,72 +178,84 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_src_dsl_.html">"src/dsl"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_src_index_.html">"src/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_src_utils_.html">"src/utils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_test_dsl_test_.html">"test/dsl-<wbr>test"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_test_utils_test_.html">"test/utils-<wbr>test"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../classes/_src_dsl_.validationbuilder.html" class="tsd-kind-icon">Validation<wbr>Builder</a>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="assertionfailed.html" class="tsd-kind-icon">Assertion<wbr>Failed</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../classes/_src_dsl_.validationcontext.html" class="tsd-kind-icon">Validation<wbr>Context</a>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="validationbuilder.html" class="tsd-kind-icon">Validation<wbr>Builder</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_src_dsl_.validationbuilderdsl.html" class="tsd-kind-icon">Validation<wbr>BuilderDSL</a>
+					<li class="current tsd-kind-class tsd-is-not-exported">
+						<a href="validationcontext.html" class="tsd-kind-icon">Validation<wbr>Context</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_src_dsl_.validationbuilderdsl.html#build" class="tsd-kind-icon">build</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
+								<a href="validationcontext.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_src_dsl_.validationbuilderdsl.html#keys" class="tsd-kind-icon">keys</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+								<a href="validationcontext.html#_contexts" class="tsd-kind-icon">_contexts</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_src_dsl_.validationbuilderdsl.html#on" class="tsd-kind-icon">on</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+								<a href="validationcontext.html#do" class="tsd-kind-icon">do</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_src_dsl_.validationcontextdsl.html" class="tsd-kind-icon">Validation<wbr>ContextDSL</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/dict.html" class="tsd-kind-icon">Dict</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_src_dsl_.html#fieldsdsl" class="tsd-kind-icon">FieldsDSL</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/nestedarray.html" class="tsd-kind-icon">Nested<wbr>Array</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_src_dsl_.html#validationdescriptor" class="tsd-kind-icon">Validation<wbr>Descriptor</a>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/validationbuilderdsl.html" class="tsd-kind-icon">Validation<wbr>BuilderDSL</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_src_dsl_.html#validationdescriptors" class="tsd-kind-icon">Validation<wbr>Descriptors</a>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/validationcontextdsl.html" class="tsd-kind-icon">Validation<wbr>ContextDSL</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_src_dsl_.html#descriptor" class="tsd-kind-icon">descriptor</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#fieldsdsl" class="tsd-kind-icon">FieldsDSL</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_src_dsl_.html#normalize" class="tsd-kind-icon">normalize</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#nested" class="tsd-kind-icon">Nested</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_src_dsl_.html#on" class="tsd-kind-icon">on</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#opaque" class="tsd-kind-icon">Opaque</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_src_dsl_.html#validates" class="tsd-kind-icon">validates</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#option" class="tsd-kind-icon">Option</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#validationdescriptor" class="tsd-kind-icon">Validation<wbr>Descriptor</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#validationdescriptors" class="tsd-kind-icon">Validation<wbr>Descriptors</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#assert" class="tsd-kind-icon">assert</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#descriptor" class="tsd-kind-icon">descriptor</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="../globals.html#dict" class="tsd-kind-icon">dict</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="../globals.html#flatten" class="tsd-kind-icon">flatten</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#normalize" class="tsd-kind-icon">normalize</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#on" class="tsd-kind-icon">on</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#validates" class="tsd-kind-icon">validates</a>
 					</li>
 				</ul>
 			</nav>
