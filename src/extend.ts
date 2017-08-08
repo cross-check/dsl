@@ -20,7 +20,7 @@ export type FieldsExtensionsDSL = Dict<Nested<ValidationBuilderDSL>>;
 
 function mergeExtensions(extensionField: string, existingDescriptors: ValidationDescriptors, extensions: FieldsExtensionsDSL): ValidationDescriptors {
   for (let merger of flatten(extensions[extensionField])) {
-    existingDescriptors[extensionField] = merger.merge(extensionField, existingDescriptors[extensionField]);
+    existingDescriptors = merger.merge(extensionField, existingDescriptors);
   }
   return existingDescriptors;
 }
@@ -54,14 +54,16 @@ export class Append implements ValidationBuilderDSL {
     throw new Error(`cannot use \`append()\` when there are no existing validations defined for \`${field}\``);
   }
 
-  merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
-    let validators: ValidationDescriptor[] = existing;
+  merge(field: string, existing: ValidationDescriptors): ValidationDescriptors {
+    let validators: ValidationDescriptor[] = existing[field];
 
     for (let builder of flatten(this.validations)) {
       validators.push(builder.build(field));
     }
 
-    return validators;
+    existing[field] = validators;
+
+    return existing;
   }
 }
 
@@ -85,13 +87,45 @@ export class Replace implements ValidationBuilderDSL {
     throw new Error(`cannot use \`replace()\` when there are no existing validations defined for \`${field}\``);
   }
 
-  merge(field: string, existing: ValidationDescriptor[]): ValidationDescriptor[] {
+  merge(field: string, existing: ValidationDescriptors): ValidationDescriptors {
+    if (Array.isArray(this.validations) && this.validations.length === 0) {
+      throw new Error(`cannot use \`replace()\` to remove all validations for \`${field}\``);
+    }
+
     let validators: ValidationDescriptor[] = [];
 
     for (let builder of flatten(this.validations)) {
       validators.push(builder.build(field));
     }
 
-    return validators;
+    existing[field] = validators;
+
+    return existing;
+  }
+}
+
+export function remove() {
+  return new Remove();
+}
+
+export class Remove implements ValidationBuilderDSL {
+  constructor() {
+  }
+
+  keys(...keys: string[]): ValidationBuilderDSL {
+    throw `not implemented`;
+  }
+
+  on(...contexts: string[]): ValidationBuilderDSL {
+    throw `not implemented`;
+  }
+
+  build(field: string): ValidationDescriptor {
+    throw new Error(`cannot use \`remove()\` when there are no existing validations defined for \`${field}\``);
+  }
+
+  merge(field: string, existing: ValidationDescriptors): ValidationDescriptors {
+    delete existing[field];
+    return existing;
   }
 }

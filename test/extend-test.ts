@@ -1,4 +1,4 @@
-import dsl, { extend, replace, append, validates, ValidationDescriptors } from '@validations/dsl';
+import dsl, { extend, replace, append, remove, validates, ValidationDescriptors } from '@validations/dsl';
 
 QUnit.module('extensions');
 
@@ -196,11 +196,27 @@ QUnit.test('replacing existing validations when none exist', assert => {
 
 });
 
-QUnit.test('replacing existing validations', assert => {
+QUnit.test('replacing existing validations with no validations', assert => {
   let parent = dsl({
     name: validates('presence'),
     email: [
       validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
+
+  assert.throws(() => {
+    extend(parent, {
+      emailConfirmation: replace([])
+    });
+  }, /cannot use `replace\(\)` to remove all validations for `emailConfirmation`/);
+});
+
+QUnit.test('replacing existing validations', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
       validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
     ],
     emailConfirmation: validates('confirmation').keys('email')
@@ -211,7 +227,9 @@ QUnit.test('replacing existing validations', assert => {
       validates('presence'),
       validates('email', { tlds: ['.com'] }),
     ]),
-    emailConfirmation: replace([])
+    emailConfirmation: replace([
+      validates('presence')
+    ])
   });
 
   let expected: ValidationDescriptors = {
@@ -236,7 +254,77 @@ QUnit.test('replacing existing validations', assert => {
         contexts: []
       }
     ],
-    emailConfirmation: []
+    emailConfirmation: [
+      {
+        field: 'emailConfirmation',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ]
+  };
+
+  assert.deepEqual(child, expected);
+});
+
+QUnit.test('removing existing validations when none exist', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
+      validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
+
+  assert.throws(() => {
+    extend(parent, {
+      password: remove()
+    });
+  }, /cannot use `remove\(\)` when there are no existing validations defined for `password`/);
+
+});
+
+QUnit.test('removing existing validations', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
+      validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
+
+  let child = extend(parent, {
+    email: replace([
+      validates('presence'),
+      validates('email', { tlds: ['.com'] }),
+    ]),
+    emailConfirmation: remove()
+  });
+
+  let expected: ValidationDescriptors = {
+    name: [
+      {
+        field: 'name',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }
+    ],
+    email: [
+      {
+        field: 'email',
+        validator: { name: 'presence', args: [] },
+        keys: [],
+        contexts: []
+      }, {
+        field: 'email',
+        validator: { name: 'email', args: [{ tlds: ['.com'] }] },
+        keys: [],
+        contexts: []
+      }
+    ]
   };
 
   assert.deepEqual(child, expected);
