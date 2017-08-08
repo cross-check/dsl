@@ -107,6 +107,23 @@ QUnit.test('append new validations when none exist', assert => {
 
 });
 
+QUnit.test('append existing validations with no validations', assert => {
+  let parent = dsl({
+    name: validates('presence'),
+    email: [
+      validates('presence'),
+      validates('email', { tlds: ['.com', '.net', '.org', '.edu', '.gov'] }),
+    ],
+    emailConfirmation: validates('confirmation').keys('email')
+  });
+
+  assert.throws(() => {
+    extend(parent, {
+      emailConfirmation: append([])
+    });
+  }, /cannot use `append\(\)` to add zero validations for `emailConfirmation`/);
+});
+
 QUnit.test('append new validations', assert => {
   let parent = dsl({
     name: validates('presence'),

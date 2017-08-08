@@ -55,6 +55,10 @@ export class Append implements ValidationBuilderDSL {
   }
 
   merge(field: string, existing: ValidationDescriptors): ValidationDescriptors {
+    if (Array.isArray(this.validations) && this.validations.length === 0) {
+      throw new Error(`cannot use \`append()\` to add zero validations for \`${field}\``);
+    }
+
     let validators: ValidationDescriptor[] = existing[field];
 
     for (let builder of flatten(this.validations)) {
