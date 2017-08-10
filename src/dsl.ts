@@ -47,7 +47,7 @@ export type ValidationDescriptor = Readonly<{
 
 
 abstract class CustomValidationBuilder implements ValidationBuilderDSL {
-  abstract build(field: string): Nested<ValidationDescriptor>;
+  abstract build(field: string): Nested<Readonly<ValidationDescriptor>>;
   abstract keys(...keys: string[]): this;
   abstract on(...contexts: string[]): this;
 
@@ -62,8 +62,9 @@ class MultiValidationBuilder extends CustomValidationBuilder {
   }
 
   add(validation: ValidationBuilderDSL): this {
-    this.validations.push(validation);
-    return this;
+    let Class = this.constructor as Constructor<this>;
+
+    return new Class([...this.validations, validation]);
   }
 
   keys(...keys: string[]): this {
@@ -81,7 +82,7 @@ class MultiValidationBuilder extends CustomValidationBuilder {
     return new Class(validations);
   }
 
-  build(field: string): Nested<ValidationDescriptor> {
+  build(field: string): Nested<Readonly<ValidationDescriptor>> {
     return this.validations.map(validation => validation.build(field));
   }
 }
@@ -114,7 +115,7 @@ class ValidationBuilder extends CustomValidationBuilder {
     return this.clone(b => b.contexts = contexts);
   }
 
-  build(field: string): ValidationDescriptor {
+  build(field: string): Readonly<ValidationDescriptor> {
     return descriptor(field, this.name, this.args, this.keyList, this.contexts);
   }
 
