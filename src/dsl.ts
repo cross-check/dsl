@@ -38,6 +38,16 @@ export interface ValidationContextDSL {
 
 export type ValidationDescriptors = Dict<ValidationDescriptor[]>;
 
+export function cloneDescriptors(descriptors: ValidationDescriptors): ValidationDescriptors {
+  let out = dict<ValidationDescriptor[]>();
+
+  Object.keys(descriptors).forEach(key => {
+    out[key] = descriptors[key].map(cloneDescriptor);
+  });
+
+  return out;
+}
+
 export type ValidationDescriptor = Readonly<{
   field: string;
   validator: Readonly<{ name: string, args: ReadonlyArray<Opaque> }>,
@@ -45,6 +55,16 @@ export type ValidationDescriptor = Readonly<{
   contexts: ReadonlyArray<string>;
 }>;
 
+function cloneDescriptor(descriptor: ValidationDescriptor): ValidationDescriptor {
+  let { field, validator: { name, args }, keys, contexts } = descriptor;
+
+  return {
+    field,
+    validator: { name, args },
+    keys: keys.slice(),
+    contexts: contexts.slice()
+  };
+}
 
 abstract class CustomValidationBuilder implements ValidationBuilderDSL {
   abstract build(field: string): Nested<Readonly<ValidationDescriptor>>;

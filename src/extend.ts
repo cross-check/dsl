@@ -1,9 +1,8 @@
-import { ValidationBuilderDSL, ValidationDescriptor, ValidationDescriptors } from './dsl';
+import { ValidationBuilderDSL, ValidationDescriptor, ValidationDescriptors, cloneDescriptors } from './dsl';
 import { Dict, Nested, assert, flatten } from './utils';
-import { cloneDeep } from 'lodash';
 
 export default function extend(parent: ValidationDescriptors, extensions: FieldsExtensionsDSL): ValidationDescriptors {
-  let existingDescriptors: ValidationDescriptors = cloneDeep(parent);
+  let existingDescriptors: ValidationDescriptors = cloneDescriptors(parent);
 
   for (let extensionField of Object.keys(extensions)) {
     if (parent[extensionField]) {
