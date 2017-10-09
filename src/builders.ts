@@ -73,3 +73,18 @@ class ChainBuilder<T> extends BaseValidationBuilder<T, ReadonlyArray<ValidationD
 export function validates<T, Options>(factory: ValidatorFactory<T, Options>, options: Options): ValidationBuilder<T> {
   return new BaseValidationBuilder(factory, options);
 }
+
+function biggestNumber1<T extends number, U extends number>(first: T, second: U): T | U {
+  return first > second ? first : second;
+}
+
+function biggestNumber1(first: 1, second: 2): 1 | 2 {
+  return first > second ? first : second;
+}
+
+function biggestNumber2(first: number, second: number): number {
+  return first > second ? first : second;
+}
+
+biggestNumber1(1, 2);
+biggestNumber2(1, 2);
