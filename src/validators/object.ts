@@ -10,9 +10,9 @@ function mapError({ path, message }: ValidationError, key: string): ValidationEr
 }
 
 export class FieldsValidator implements ValidatorInstance<Indexable> {
-  constructor(protected env: Environment, protected descriptors: Dict<ValidationDescriptor>) {}
+  constructor(protected env: Environment, protected descriptors: Dict<ValidationDescriptor<unknown>>) {}
 
-  run(value: Indexable, context: Option<string>): Task<ValidationError[]> {
+  run(value: unknown, context: Option<string>): Task<ValidationError[]> {
     return new Task(async run => {
       let errors: ValidationError[] = [];
 
@@ -26,15 +26,15 @@ export class FieldsValidator implements ValidatorInstance<Indexable> {
   }
 }
 
-export function fields<T>(builders: Dict<ValidationBuilder<T>>): ValidationBuilder<Indexable<T>> {
+export function fields(builders: Dict<ValidationBuilder<unknown, unknown>>): ValidationBuilder<unknown, unknown> {
   return validates(factoryFor(FieldsValidator), normalizeFields(builders));
 }
 
-export function object(builders: Dict<ValidationBuilder<unknown>>): ValidationBuilder<unknown> {
+export function object(builders: Dict<ValidationBuilder<unknown, unknown>>): ValidationBuilder<unknown, unknown> {
   return isObject().andThen(fields(builders));
 }
 
-function normalizeFields(builders: Dict<ValidationBuilder<unknown>>): Dict<ValidationDescriptor> {
+function normalizeFields(builders: Dict<ValidationBuilder<unknown, object>>): Dict<ValidationDescriptor> {
   let out = dict<ValidationDescriptor>();
 
   for (let [key, value] of entries(builders)) {

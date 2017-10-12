@@ -3,11 +3,11 @@ import { Task } from 'no-show';
 import { Option } from 'ts-std';
 import { ValidationBuilder, validates } from '../builders';
 
-export interface ValidatorClass<T, Options> {
-  new(env: Environment, options: Options): ValidatorInstance<T>;
+export interface ValidatorClass<T, U, Options> {
+  new(env: Environment, options: Options): ValidatorInstance<T, U>;
 }
 
-export interface ValidatorInstance<T> {
+export interface ValidatorInstance<T, U> {
   run(value: T, context: Option<string>): Task<ValidationError[]>;
 }
 

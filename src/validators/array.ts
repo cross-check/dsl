@@ -9,10 +9,10 @@ function mapError({ path, message }: ValidationError, index: number): Validation
   return { path: [...path, String(index)], message };
 }
 
-export class ItemsValidator implements ValidatorInstance<unknown[]> {
-  constructor(protected env: Environment, protected descriptor: ValidationDescriptor) {}
+export class ItemsValidator<T> implements ValidatorInstance<unknown[]> {
+  constructor(protected env: Environment, protected descriptor: ValidationDescriptor<T>) {}
 
-  run(value: unknown[], context: Option<string>): Task<ValidationError[]> {
+  run(value: T[], context: Option<string>): Task<ValidationError[]> {
     return new Task(async run => {
       let errors: ValidationError[] = [];
 
@@ -26,10 +26,10 @@ export class ItemsValidator implements ValidatorInstance<unknown[]> {
   }
 }
 
-export function items<T>(builder: ValidationBuilder<T>): ValidationBuilder<T[]> {
+export function items<T, U>(builder: ValidationBuilder<T, U>): ValidationBuilder<T[], U[]> {
   return validates(factoryFor(ItemsValidator), normalize(builder));
 }
 
-export function array(builder: ValidationBuilder<unknown>): ValidationBuilder<unknown> {
+export function array<T>(builder: ValidationBuilder<unknown, T>): ValidationBuilder<unknown, T[]> {
   return isArray().andThen(items(builder));
 }

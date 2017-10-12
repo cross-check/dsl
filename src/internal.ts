@@ -3,13 +3,12 @@
  */
 
 import { ValidationDescriptor, ValidatorFactory } from '@validations/core';
-import { unknown } from 'ts-std';
 
 /** @internal */
-export function descriptor<T>(
-  factory: ValidatorFactory<T, unknown>,
-  options: unknown,
+export function descriptor<T, Options>(
+  factory: ValidatorFactory<T, Options>,
+  options: Options,
   contexts: ReadonlyArray<string>
-): ValidationDescriptor<T> {
+): ValidationDescriptor<T, Options> {
   return { factory, options, contexts };
 }

@@ -1,12 +1,15 @@
 import { ErrorMessage } from '@validations/core';
-import { Absent, Present, isIndexable as indexable, unknown } from 'ts-std';
+import { Absent, Dict, Present, isIndexable as indexable, unknown } from 'ts-std';
 import { ValidationBuilder, validates } from '../builders';
 import { factoryFor } from './abstract';
 import { ValueValidator } from './value';
 
+/** @internal */
+export type Workaround = Dict;
+
 export type Checker<From, To extends From> = (value: From) => value is To;
 
-export function is<From, To extends From>(checker: Checker<From, To>, info: string): () => ValidationBuilder<From> {
+export function is<From, To extends From>(checker: Checker<From, To>, info: string): () => ValidationBuilder<From, To> {
   class Validator extends ValueValidator<From, void> {
     validate(value: From): ErrorMessage | void {
       return checker(value) ? undefined : { key: 'type', args: info };
@@ -18,7 +21,7 @@ export function is<From, To extends From>(checker: Checker<From, To>, info: stri
   return () => builder;
 }
 
-function isTypeOf<To>(typeOf: string): () => ValidationBuilder<unknown> {
+function isTypeOf<To>(typeOf: string): () => ValidationBuilder<unknown, To> {
   return is((value: unknown): value is To => typeof value === typeOf, typeOf);
 }
 
@@ -32,11 +35,11 @@ export const isNotNull = is((value: unknown): value is NotNull => value !== null
 export const isUndefined = is((value: unknown): value is undefined => value === undefined, 'undefined');
 export const isNotUndefined = is((value: unknown): value is NotUndefined => value !== undefined, 'not-undefined');
 
-export const isNumber = isTypeOf('number');
-export const isBoolean = isTypeOf('boolean');
-export const isString = isTypeOf('string');
-export const isSymbol = isTypeOf('symbol');
-export const isFunction = isTypeOf('function');
+export const isNumber = isTypeOf<number>('number');
+export const isBoolean = isTypeOf<boolean>('boolean');
+export const isString = isTypeOf<string>('string');
+export const isSymbol = isTypeOf<symbol>('symbol');
+export const isFunction = isTypeOf<() => void>('function');
 export const isIndexable = is(indexable, 'indexable');
 export const isObject = is((value: unknown): value is object => (value !== null && typeof value === 'object'), 'object');
 export const isArray = is((value: unknown): value is unknown[] => Array.isArray(value), 'array');
