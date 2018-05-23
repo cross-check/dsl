@@ -27,7 +27,7 @@ The `@cross-check/core` repository unpacks these points in much greater detail.
 
 ## Documentation
 
-https://tildeio.github.io/validations-dsl
+https://cross-check.github.io/dsl/
 
 You can also generate documentation locally in `docs/` by running `npm run docs`
 
