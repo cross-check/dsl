@@ -57,14 +57,17 @@ export class FieldsValidator<T> implements ValidatorInstance<Indexable<T>> {
 /**
  * @api primitive
  *
- * The class that powers the `allFieldsPresent()` validator function.
+ * The class that powers the `keys()` validator function.
+ *
+ * This validator checks that the value contains all of the enumerated fields
+ * and also does not contain any extra fields.
  */
-export class AllFieldsPresentValidator<T> implements ValidatorInstance<Indexable<T>> {
-  static validatorName = "all-fields-present";
+export class KeysValidator<T> implements ValidatorInstance<Indexable<T>> {
+  static validatorName = "keys";
 
   constructor(
     protected env: Environment,
-    protected descriptors: Dict<ValidationDescriptor<T>>
+    protected descriptorKeys: string[]
   ) { }
 
   run(value: Indexable<T>): Task<ValidationError[]> {
@@ -72,46 +75,18 @@ export class AllFieldsPresentValidator<T> implements ValidatorInstance<Indexable
       let errors: ValidationError[] = [];
       let valueKeys = Object.keys(value);
 
-      for (let [key] of entries(this.descriptors)) {
-        let index = valueKeys.indexOf(key.toString());
+      for (let key of this.descriptorKeys) {
+        let index = valueKeys.indexOf(key);
         if (index === -1) {
           // descriptor field is not present in the value
-          errors.push({ path: [key.toString()], message: { name: "present", details: null } });
-        }
-      }
-
-      return errors;
-    });
-  }
-}
-
-/**
- * @api primitive
- *
- * The class that powers the `noFieldsExtra()` validator function.
- */
-export class NoFieldsExtraValidator<T> implements ValidatorInstance<Indexable<T>> {
-  static validatorName = "no-fields-extra";
-
-  constructor(
-    protected env: Environment,
-    protected descriptors: Dict<ValidationDescriptor<T>>
-  ) { }
-
-  run(value: Indexable<T>): Task<ValidationError[]> {
-    return new Task(async () => {
-      let errors: ValidationError[] = [];
-      let valueKeys = Object.keys(value);
-
-      for (let [key] of entries(this.descriptors)) {
-        let index = valueKeys.indexOf(key.toString());
-        if (index > -1) {
+          errors.push({ path: [key], message: { name: "type", details: "present" } });
+        } else {
           valueKeys.splice(index, 1);
         }
       }
 
       // these fields were not present in the descriptors
-      errors.push(...valueKeys.map(key => ({ path: [key], message: { name: "absent", details: null } })));
+      errors.push(...valueKeys.map(key => ({ path: [key], message: { name: "type", details: "absent" } })));
 
       return errors;
     });
@@ -131,29 +106,16 @@ export function fields<T>(
   );
 }
 
-export function allFieldsPresent<T>(
-  builders: Dict<ValidationBuilder<T>>
+export function keys<T>(
+  descriptorKeys: string[]
 ): ValidationBuilder<Indexable<T>> {
   return validates(
-    "all-fields-present",
-    factoryFor(AllFieldsPresentValidator as ValidatorClass<
+    "keys",
+    factoryFor(KeysValidator as ValidatorClass<
       Indexable<T>,
-      Dict<ValidationDescriptor<T>>
+      string[]
     >),
-    normalizeFields(builders)
-  );
-}
-
-export function noFieldsExtra<T>(
-  builders: Dict<ValidationBuilder<T>>
-): ValidationBuilder<Indexable<T>> {
-  return validates(
-    "no-fields-extra",
-    factoryFor(NoFieldsExtraValidator as ValidatorClass<
-      Indexable<T>,
-      Dict<ValidationDescriptor<T>>
-    >),
-    normalizeFields(builders)
+    descriptorKeys
   );
 }
 
@@ -173,7 +135,7 @@ export function strictObject(
   builders: Dict<ValidationBuilder<unknown>>
 ): ValidationBuilder<unknown> {
   return isObject()
-    .andThen(allFieldsPresent(builders).andAlso(noFieldsExtra(builders)))
+    .andThen(keys(Object.keys(builders)))
     .andThen(fields(builders));
 }
 

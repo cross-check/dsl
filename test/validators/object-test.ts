@@ -117,21 +117,21 @@ QUnit.test(`simple ${validators.strictObject.name}`, async assert => {
 
   assert.equal(
     format(validates(geo)),
-    `(pipe (is-object) (all (all-fields-present lat=(is-number) long=(is-number)) (no-fields-extra lat=(is-number) long=(is-number))) (fields lat=(is-number) long=(is-number)))`
+    `(pipe (is-object) (keys "lat" "long") (fields lat=(is-number) long=(is-number)))`
   );
 
   assert.deepEqual(await run(geo, { lat: 0, long: 0 }), success());
 
   assert.deepEqual(await run(geo, { lat: 0 }), [
-    failure("long", "present", null)
+    failure("long", "type", "present")
   ]);
 
   assert.deepEqual(await run(geo, { lat: 0, long: 0, extraData: 1 }), [
-    failure("extraData", "absent", null)
+    failure("extraData", "type", "absent")
   ]);
 
   assert.deepEqual(await run(geo, { lat: 0, extraData: 1 }), [
-    failure("long", "present", null),
-    failure("extraData", "absent", null)
+    failure("long", "type", "present"),
+    failure("extraData", "type", "absent")
   ]);
 });
