@@ -108,3 +108,30 @@ type ObjectBuilder = (
     ]);
   });
 });
+
+QUnit.test(`simple ${validators.strictObject.name}`, async assert => {
+  const geo = validators.strictObject({
+    lat: validators.isNumber(),
+    long: validators.isNumber()
+  });
+
+  assert.equal(
+    format(validates(geo)),
+    `(pipe (is-object) (all (all-fields-present lat=(is-number) long=(is-number)) (no-fields-extra lat=(is-number) long=(is-number))) (fields lat=(is-number) long=(is-number)))`
+  );
+
+  assert.deepEqual(await run(geo, { lat: 0, long: 0 }), success());
+
+  assert.deepEqual(await run(geo, { lat: 0 }), [
+    failure("long", "present", null)
+  ]);
+
+  assert.deepEqual(await run(geo, { lat: 0, long: 0, extraData: 1 }), [
+    failure("extraData", "absent", null)
+  ]);
+
+  assert.deepEqual(await run(geo, { lat: 0, extraData: 1 }), [
+    failure("long", "present", null),
+    failure("extraData", "absent", null)
+  ]);
+});
